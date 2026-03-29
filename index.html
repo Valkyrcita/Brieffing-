@@ -297,34 +297,177 @@
                         <label>¿Qué te motivó a empezar esto? *</label>
                         <textarea name="motivacion" required></textarea>
                         
-                        <label>¿Servicio rápido o experiencia spa? *</label>
-                        <select name="tipo_servicio" required>
-                            <option value="">Selecciona...</option>
-                            <option value="rapido">Servicio rápido</option>
-                            <option value="experiencia">Experiencia (spa, relax)</option>
-                            <option value="mixto">Mixto</option>
-                        </select>
+                        <label>¿Quieres que se sienta más como un servicio rápido o como una experiencia (tipo spa, relax, etc.)? *</label>
+                        <textarea name="tipo_servicio" required placeholder="Describe cómo quieres que se sienta..."></textarea>
                     </div>
 
                     <!-- Sección 2 -->
                     <div class="section">
-                        <div class="section-title">2. Nombre del negocio</div>
-                        <label>¿Nombres o palabras que te gusten?</label>
-                        <input type="text" name="nombre_ideas">
+                        <div class="section-title">2. Nombre (si tienes alguna idea)</div>
+                        <label>¿Tienes algún nombre pensado o palabras que te gusten? *</label>
+                        <textarea name="nombre_ideas" required></textarea>
                         
-                        <label>Estilo del nombre *</label>
-                        <select name="estilo_nombre" required>
-                            <option value="">Selecciona...</option>
-                            <option value="elegante">Elegante</option>
-                            <option value="divertido">Divertido</option>
-                            <option value="moderno">Moderno</option>
-                            <option value="sencillo">Sencillo</option>
-                        </select>
+                        <label>¿Te gustaría algo más elegante, divertido, moderno o sencillo? *</label>
+                        <textarea name="estilo_nombre" required placeholder="Describe el estilo que prefieres..."></textarea>
                         
-                        <label>Idioma *</label>
-                        <select name="idioma_nombre" required>
-                            <option value="">Selecciona...</option>
-                            <option value="espanol">Español</option>
+                        <label>¿Prefieres algo en español, inglés o mixto? *</label>
+                        <textarea name="idioma_nombre" required placeholder="Explica tu preferencia..."></textarea>
+                    </div>
+
+                    <!-- Sección 3 -->
+                    <div class="section">
+                        <div class="section-title">3. Personalidad de la marca (como si fuera una persona)</div>
+                        <label>Si tu marca fuera una persona, ¿cómo sería? (ej: elegante, divertida, seria, coqueta, minimalista…) *</label>
+                        <textarea name="personalidad" required></textarea>
+                        
+                        <label>¿Qué edad tendría más o menos? *</label>
+                        <textarea name="edad_marca" required placeholder="Ej: 25-35 años, joven adulta, etc."></textarea>
+                        
+                        <label>¿Cómo vestiría? (lujosa, casual, trendy, sencilla…) *</label>
+                        <textarea name="estilo_vestir" required></textarea>
+                        
+                        <label>¿Cómo hablaría? (formal, amigable, con confianza, "de tú a tú") *</label>
+                        <textarea name="forma_hablar" required></textarea>
+                        
+                        <label>¿Qué tipo de música escucharía o qué estilo de vida tendría? *</label>
+                        <textarea name="estilo_vida" required></textarea>
+                    </div>
+
+                    <!-- Sección 4 -->
+                    <div class="section">
+                        <div class="section-title">4. Servicios que vas a ofrecer</div>
+                        <label>¿Qué servicios específicos quieres dar desde el inicio? (manicura, pedicura, uñas acrílicas, gel, lifting de pestañas, extensiones, diseño de cejas, etc.) *</label>
+                        <textarea name="servicios_iniciales" required></textarea>
+                        
+                        <label>¿Hay algún servicio que quieras que sea tu "especialidad"?</label>
+                        <textarea name="especialidad"></textarea>
+                        
+                        <label>¿Planeas agregar más servicios en el futuro?</label>
+                        <textarea name="servicios_futuros"></textarea>
+                    </div>
+
+                    <!-- Sección 5 -->
+                    <div class="section">
+                        <div class="section-title">5. Público objetivo</div>
+                        <label>¿A qué tipo de clientas quieres atraer? Describe... *</label>
+                        <textarea name="clientas_ideales" required placeholder="Ej: Jóvenes 15-25, adultas trabajadoras 25-45, etc."></textarea>
+                        
+                        <label>¿Quieres que tu marca se sienta más económica, intermedia o premium? *</label>
+                        <textarea name="precio_posicion" required placeholder="Explica tu visión de precios..."></textarea>
+                        
+                        <label>¿Qué estilo tienen tus clientas ideales? (arregladas, naturales, llamativas, etc.) *</label>
+                        <textarea name="estilo_clientas" required></textarea>
+                    </div>
+
+                    <!-- Sección 6 -->
+                    <div class="section">
+                        <div class="section-title">6. Lugar y contexto del negocio</div>
+                        <label>¿Dónde va a funcionar el negocio al inicio? (casa, local independiente, a domicilio) *</label>
+                        <textarea name="ubicacion" required></textarea>
+                        
+                        <label>¿Cómo es el espacio? (pequeño, amplio, compartido…) *</label>
+                        <textarea name="descripcion_espacio" required></textarea>
+                        
+                        <label>¿Qué ambiente quieres crear? (relajante, moderno, girly, elegante…) *</label>
+                        <textarea name="ambiente_deseado" required></textarea>
+                    </div>
+
+                    <!-- Sección 7 -->
+                    <div class="section">
+                        <div class="section-title">7. Estilo visual</div>
+                        <label>¿Qué colores te gustan para tu marca? *</label>
+                        <textarea name="colores_preferidos" required></textarea>
+                        
+                        <label>¿Prefieres algo minimalista o más cargado/decorado? *</label>
+                        <textarea name="estilo_visual" required></textarea>
+                        
+                        <label>¿Te gustan más los tonos neutros, pasteles, brillantes, oscuros? *</label>
+                        <textarea name="tonos_preferidos" required></textarea>
+                        
+                        <label>¿Qué cosas NO te gustan (para evitarlas)? *</label>
+                        <textarea name="colores_evitar" required></textarea>
+                    </div>
+
+                    <!-- Sección 8 -->
+                    <div class="section">
+                        <div class="section-title">8. Referencias y gustos</div>
+                        <label>¿Hay marcas (de uñas, belleza o cualquier cosa) que te gusten visualmente? *</label>
+                        <textarea name="marcas_referencias" required></textarea>
+                        
+                        <label>¿Como la tarjeta que me enseñaste, hay algún material o elemento que te llame la atención? *</label>
+                        <textarea name="materiales_elementos" required></textarea>
+                        
+                        <label>¿Qué te llamó la atención de esos ejemplos? (colores, tipografía, estilo…) *</label>
+                        <textarea name="detalles_referencias" required></textarea>
+                    </div>
+
+                    <!-- Sección 9 -->
+                    <div class="section">
+                        <div class="section-title">9. Materiales y producción</div>
+                        <label>¿Con qué posibilidades cuentas para imprimir y montar cosas? Describe... *</label>
+                        <textarea name="posibilidades_impresion" required placeholder="Tarjetas, stickers, carteles, uniformes, etc."></textarea>
+                    </div>
+
+                    <!-- Sección 10 -->
+                    <div class="section">
+                        <div class="section-title">10. Presencia digital</div>
+                        <label>¿Vas a usar redes sociales? ¿Cuáles? (Instagram, WhatsApp, Facebook…) *</label>
+                        <textarea name="redes_sociales" required></textarea>
+                        
+                        <label>¿Te interesa tener logo, plantillas para posts, historias, etc.? *</label>
+                        <textarea name="necesidades_digitales" required></textarea>
+                        
+                        <label>¿Vas a manejar citas online?</label>
+                        <textarea name="citas_online"></textarea>
+                    </div>
+
+                    <!-- Sección 11 -->
+                    <div class="section">
+                        <div class="section-title">11. Proyección a futuro</div>
+                        <label>¿Cómo te gustaría ver tu negocio en 1 año? *</label>
+                        <textarea name="proyeccion_futura" required></textarea>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+                        <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="successContainer" style="display: none; padding: 25px;">
+            <div class="success-message show" id="successMessage">
+                <h2>✅ ¡Perfecto!</h2>
+                <p>Tus respuestas han sido enviadas correctamente a <strong>laritsacamoa@gmail.com</strong></p>
+                <p>Te contactaré pronto por WhatsApp para trabajar en tu branding ✨</p>
+                <button class="btn-secondary" onclick="location.reload()" style="margin-top: 20px; max-width: 250px;">Hacer otro cuestionario</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mostrar loading
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Enviando... ⏳';
+            submitBtn.disabled = true;
+
+            // Recopilar datos
+            const formData = new FormData(this);
+            const responses = {};
+            
+            for (let [key, value] of formData.entries()) {
+                responses[key] = value;
+            }
+
+            // Formatear mensaje para email
+            let emailBody = `📋 NUEVO CUESTIONARIO BRANDING COMPLETO\n\n`;
+            emailBody += `👤 Cliente: ${responses.nombre || 'No especificado'}\n`;
+            emailBody += `📱 WhatsApp: ${responses.telefono || 'No especific        <option value="espanol">Español</option>
                             <option value="ingles">Inglés</option>
                             <option value="mixto">Mixto</option>
                         </select>
