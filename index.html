@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario Branding - Negocio de Uñas, Pestañas y Cejas</title>
+    <title>Cuestionario Branding - Uñas, Pestañas y Cejas</title>
     <style>
         * {
             margin: 0;
@@ -15,45 +15,45 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #6a0dad 0%, #4a148c 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             color: #333;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            max-width: 100%;
+            background: rgba(255, 255, 255, 0.97);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
             overflow: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 30px 25px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            font-weight: 300;
+            font-size: clamp(1.4em, 5vw, 2em);
+            margin-bottom: 8px;
+            font-weight: 400;
         }
 
         .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
+            opacity: 0.95;
+            font-size: clamp(0.9em, 4vw, 1.1em);
         }
 
         .form-section {
-            padding: 40px 30px;
+            padding: 25px;
         }
 
         .section {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .section:last-child {
@@ -63,9 +63,9 @@
 
         .section-title {
             color: #6a1b9a;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            font-weight: 500;
+            font-size: clamp(1.1em, 4.5vw, 1.3em);
+            margin-bottom: 18px;
+            font-weight: 600;
         }
 
         label {
@@ -73,94 +73,93 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: #555;
+            font-size: 16px;
         }
 
-        input[type="text"], input[type="email"], textarea, select {
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
+            padding: 16px;
+            border: 2px solid #e8e8e8;
             border-radius: 12px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.2s ease;
             font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
-        input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #8e24aa;
+            box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
         }
 
         textarea {
-            min-height: 100px;
+            min-height: 90px;
             resize: vertical;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            padding-right: 45px;
         }
 
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 15px;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
-            transform: scale(1.2);
-        }
-
-        .radio-group {
+        .checkbox-group, .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 12px;
         }
 
-        .radio-item {
+        .checkbox-item, .radio-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+            padding: 8px 0;
         }
 
+        .checkbox-item input[type="checkbox"], 
         .radio-item input[type="radio"] {
-            width: auto;
-            transform: scale(1.2);
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
 
         .buttons {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 40px;
-            padding-top: 30px;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 25px;
             border-top: 1px solid #eee;
         }
 
         button {
-            padding: 15px 40px;
+            padding: 18px 24px;
             border: none;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: inherit;
+            width: 100%;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
+            font-size: 17px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(142, 36, 170, 0.4);
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -169,15 +168,36 @@
             border: 2px solid #8e24aa;
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover:not(:disabled) {
             background: #8e24aa;
             color: white;
         }
 
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .results {
             display: none;
-            padding: 40px 30px;
-            background: white;
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         .results.show {
@@ -185,51 +205,62 @@
         }
 
         .result-item {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             padding: 20px;
-            background: linear-gradient(135deg, #f8f5ff 0%, #f0e6ff 100%);
+            background: linear-gradient(135deg, #f9f5ff 0%, #f1e8ff 100%);
             border-radius: 12px;
             border-left: 4px solid #8e24aa;
         }
 
         .result-title {
             color: #6a1b9a;
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .result-content {
             line-height: 1.6;
             color: #555;
+            white-space: pre-wrap;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .form-section {
-                padding: 30px 20px;
+        .result-list {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .back-btn {
+            margin-bottom: 25px;
+        }
+
+        /* Scrollbar personalizada */
+        .results::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .results::-webkit-scrollbar-thumb {
+            background: #8e24aa;
+            border-radius: 2px;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 25px;
             }
             
             .buttons {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                justify-content: center;
             }
             
             button {
-                width: 100%;
-                max-width: 300px;
+                width: auto;
+                min-width: 140px;
             }
         }
     </style>
@@ -238,48 +269,61 @@
     <div class="container">
         <div class="header">
             <h1>✨ Cuestionario Branding</h1>
-            <p>Negocio de Uñas, Pestañas y Cejas</p>
+            <p>Uñas, Pestañas y Cejas</p>
         </div>
 
         <div id="formContainer">
             <form id="questionnaireForm">
                 <div class="form-section">
+                    <!-- Datos de contacto -->
+                    <div class="section">
+                        <div class="section-title">📱 Tus datos de contacto</div>
+                        <label>Nombre completo *</label>
+                        <input type="text" name="nombre" required>
+                        
+                        <label>Teléfono de WhatsApp *</label>
+                        <input type="tel" name="telefono" required placeholder="Ej: 300 123 4567">
+                        
+                        <label>Email (opcional)</label>
+                        <input type="email" name="email" placeholder="tu@email.com">
+                    </div>
+
                     <!-- Sección 1 -->
                     <div class="section">
                         <div class="section-title">1. Idea general del negocio</div>
-                        <label>¿Cómo te imaginas tu negocio en pocas palabras?</label>
+                        <label>¿Cómo te imaginas tu negocio en pocas palabras? *</label>
                         <textarea name="idea_general" required></textarea>
                         
-                        <label>¿Qué te motivó a empezar esto?</label>
+                        <label>¿Qué te motivó a empezar esto? *</label>
                         <textarea name="motivacion" required></textarea>
                         
-                        <label>¿Quieres que se sienta más como un servicio rápido o como una experiencia?</label>
+                        <label>¿Servicio rápido o experiencia spa? *</label>
                         <select name="tipo_servicio" required>
-                            <option value="">Selecciona una opción</option>
+                            <option value="">Selecciona...</option>
                             <option value="rapido">Servicio rápido</option>
-                            <option value="experiencia">Experiencia (spa, relax, etc.)</option>
+                            <option value="experiencia">Experiencia (spa, relax)</option>
                             <option value="mixto">Mixto</option>
                         </select>
                     </div>
 
                     <!-- Sección 2 -->
                     <div class="section">
-                        <div class="section-title">2. Nombre (si tiene alguna idea)</div>
-                        <label>¿Tienes algún nombre pensado o palabras que te gusten?</label>
-                        <input type="text" name="nombre_ideas" placeholder="Ej: Luna Nails, Glamour, etc.">
+                        <div class="section-title">2. Nombre del negocio</div>
+                        <label>¿Nombres o palabras que te gusten?</label>
+                        <input type="text" name="nombre_ideas">
                         
-                        <label>¿Te gustaría algo más elegante, divertido, moderno o sencillo?</label>
+                        <label>Estilo del nombre *</label>
                         <select name="estilo_nombre" required>
-                            <option value="">Selecciona una opción</option>
+                            <option value="">Selecciona...</option>
                             <option value="elegante">Elegante</option>
                             <option value="divertido">Divertido</option>
                             <option value="moderno">Moderno</option>
                             <option value="sencillo">Sencillo</option>
                         </select>
                         
-                        <label>¿Prefieres algo en español, inglés o mixto?</label>
+                        <label>Idioma *</label>
                         <select name="idioma_nombre" required>
-                            <option value="">Selecciona una opción</option>
+                            <option value="">Selecciona...</option>
                             <option value="espanol">Español</option>
                             <option value="ingles">Inglés</option>
                             <option value="mixto">Mixto</option>
@@ -289,39 +333,36 @@
                     <!-- Sección 3 -->
                     <div class="section">
                         <div class="section-title">3. Personalidad de la marca</div>
-                        <label>Si tu marca fuera una persona, ¿cómo sería?</label>
+                        <label>Si fuera una persona, ¿cómo sería? *</label>
                         <textarea name="personalidad" required></textarea>
                         
-                        <label>¿Qué edad tendría más o menos?</label>
-                        <input type="text" name="edad_marca" placeholder="Ej: 25-35 años">
+                        <label>Edad aproximada</label>
+                        <input type="text" name="edad_marca">
                         
-                        <label>¿Cómo vestiría?</label>
+                        <label>¿Cómo vestiría? *</label>
                         <textarea name="estilo_vestir" required></textarea>
                         
-                        <label>¿Cómo hablaría?</label>
+                        <label>¿Cómo hablaría? *</label>
                         <textarea name="forma_hablar" required></textarea>
-                        
-                        <label>¿Qué tipo de música escucharía o qué estilo de vida tendría?</label>
-                        <textarea name="estilo_vida" required></textarea>
                     </div>
 
                     <!-- Sección 4 -->
                     <div class="section">
-                        <div class="section-title">4. Servicios que vas a ofrecer</div>
-                        <label>¿Qué servicios específicos quieres dar desde el inicio?</label>
+                        <div class="section-title">4. Servicios</div>
+                        <label>Servicios desde el inicio *</label>
                         <textarea name="servicios_iniciales" required></textarea>
                         
-                        <label>¿Hay algún servicio que quieras que sea tu "especialidad"?</label>
+                        <label>Tu especialidad</label>
                         <input type="text" name="especialidad">
                         
-                        <label>¿Planeas agregar más servicios en el futuro?</label>
+                        <label>Servicios futuros</label>
                         <textarea name="servicios_futuros"></textarea>
                     </div>
 
                     <!-- Sección 5 -->
                     <div class="section">
                         <div class="section-title">5. Público objetivo</div>
-                        <label>¿A qué tipo de clientas quieres atraer?</label>
+                        <label>¿Qué clientas quieres atraer?</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
                                 <input type="checkbox" name="publico[]" value="jovenes"> Jóvenes (15-25)
@@ -330,160 +371,77 @@
                                 <input type="checkbox" name="publico[]" value="adultas"> Adultas (25-45)
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="exclusivo"> Público más exclusivo
+                                <input type="checkbox" name="publico[]" value="exclusivo"> Exclusivo
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="todos"> Todo el mundo
+                                <input type="checkbox" name="publico[]" value="todos"> Todo público
                             </div>
                         </div>
                         
-                        <label>¿Quieres que tu marca se sienta más económica, intermedia o premium?</label>
+                        <label>Posición de precio *</label>
                         <select name="precio_posicion" required>
-                            <option value="">Selecciona una opción</option>
+                            <option value="">Selecciona...</option>
                             <option value="economica">Económica</option>
                             <option value="intermedia">Intermedia</option>
                             <option value="premium">Premium</option>
                         </select>
-                        
-                        <label>¿Qué estilo tienen tus clientas ideales?</label>
-                        <textarea name="estilo_clientas" required></textarea>
                     </div>
 
                     <!-- Sección 6 -->
                     <div class="section">
-                        <div class="section-title">6. Lugar y contexto del negocio</div>
-                        <label>¿Dónde va a funcionar el negocio al inicio?</label>
+                        <div class="section-title">6. Ubicación</div>
+                        <label>¿Dónde funcionará? *</label>
                         <div class="radio-group">
                             <div class="radio-item">
-                                <input type="radio" name="ubicacion" value="casa" required> En tu casa
+                                <input type="radio" name="ubicacion" value="casa" required> En casa
                             </div>
                             <div class="radio-item">
-                                <input type="radio" name="ubicacion" value="local"> En un local independiente
+                                <input type="radio" name="ubicacion" value="local"> Local propio
                             </div>
                             <div class="radio-item">
                                 <input type="radio" name="ubicacion" value="domicilio"> A domicilio
                             </div>
                         </div>
                         
-                        <label>¿Cómo es el espacio?</label>
+                        <label>Descripción del espacio *</label>
                         <textarea name="descripcion_espacio" required></textarea>
-                        
-                        <label>¿Qué ambiente quieres crear?</label>
-                        <textarea name="ambiente_deseado" required></textarea>
-                    </div>
-
-                    <!-- Sección 7 -->
-                    <div class="section">
-                        <div class="section-title">7. Estilo visual</div>
-                        <label>¿Qué colores te gustan para tu marca?</label>
-                        <textarea name="colores_preferidos" required></textarea>
-                        
-                        <label>¿Prefieres algo minimalista o más cargado/decorado?</label>
-                        <select name="estilo_visual" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="minimalista">Minimalista</option>
-                            <option value="decorado">Más cargado/decorado</option>
-                        </select>
-                        
-                        <label>¿Te gustan más los tonos neutros, pasteles, brillantes, oscuros?</label>
-                        <textarea name="tonos_preferidos" required></textarea>
-                        
-                        <label>¿Qué cosas NO te gustan (para evitarlas)?</label>
-                        <textarea name="evitar_visual"></textarea>
-                    </div>
-
-                    <!-- Sección 8 -->
-                    <div class="section">
-                        <div class="section-title">8. Referencias y gustos</div>
-                        <label>¿Hay marcas que te gusten visualmente?</label>
-                        <textarea name="marcas_referencias" required></textarea>
-                        
-                        <label>¿Hay algún material o elemento que te llame la atención?</label>
-                        <textarea name="elementos_favoritos"></textarea>
-                        
-                        <label>¿Qué te llamó la atención de esos ejemplos?</label>
-                        <textarea name="detalles_referencias" required></textarea>
-                    </div>
-
-                    <!-- Sección 9 -->
-                    <div class="section">
-                        <div class="section-title">9. Materiales y producción</div>
-                        <label>¿Con qué posibilidades cuentas para imprimir?</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="materiales[]" value="tarjetas"> Tarjetas de presentación
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="materiales[]" value="stickers"> Stickers
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="materiales[]" value="carteles"> Carteles
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="materiales[]" value="uniformes"> Uniformes
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sección 10 -->
-                    <div class="section">
-                        <div class="section-title">10. Presencia digital</div>
-                        <label>¿Vas a usar redes sociales? ¿Cuáles?</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="redes[]" value="instagram"> Instagram
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="redes[]" value="whatsapp"> WhatsApp
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="redes[]" value="facebook"> Facebook
-                            </div>
-                        </div>
-                        
-                        <label>¿Te interesa tener logo, plantillas para posts, historias, etc.?</label>
-                        <textarea name="necesidades_digitales" required></textarea>
-                        
-                        <label>¿Vas a manejar citas online?</label>
-                        <select name="citas_online" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                            <option value="quizas">Quizás en el futuro</option>
-                        </select>
-                    </div>
-
-                    <!-- Sección 11 -->
-                    <div class="section">
-                        <div class="section-title">11. Proyección a futuro</div>
-                        <label>¿Cómo te gustaría ver tu negocio en 1 año?</label>
-                        <textarea name="vision_futura" required></textarea>
                     </div>
 
                     <div class="buttons">
                         <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
-                        <button type="submit" class="btn-primary">Ver Mis Respuestas ✨</button>
+                        <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div id="resultsContainer" class="results">
-            <div class="buttons">
-                <button class="btn-secondary" onclick="volverFormulario()">← Volver al Formulario</button>
+        <div id="successContainer" style="display: none; padding: 25px;">
+            <div class="success-message show" id="successMessage">
+                <h2>✅ ¡Perfecto!</h2>
+                <p>Tus respuestas han sido enviadas correctamente a <strong>laritsacamoa@gmail.com</strong></p>
+                <p>Te contactaré pronto por WhatsApp para trabajar en tu branding ✨</p>
+                <button class="btn-secondary" onclick="location.reload()" style="margin-top: 20px; max-width: 250px;">Hacer otro cuestionario</button>
             </div>
-            <div id="resultsContent"></div>
         </div>
     </div>
 
     <script>
+        // EmailJS configuration - Reemplaza con tus credenciales
+        // emailjs.init("TU_PUBLIC_KEY"); // Configura esto en tu cuenta EmailJS
+
         document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Mostrar loading
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Enviando... ⏳';
+            submitBtn.disabled = true;
+
+            // Recopilar datos
             const formData = new FormData(this);
             const responses = {};
             
-            // Recopilar todas las respuestas
             for (let [key, value] of formData.entries()) {
                 if (key.includes('[]')) {
                     const mainKey = key.replace('[]', '');
@@ -493,11 +451,59 @@
                     responses[key] = value;
                 }
             }
-            
-            mostrarResultados(responses);
+
+            // Formatear mensaje para email
+            let emailBody = `📋 NUEVO CUESTIONARIO BRANDING\n\n`;
+            emailBody += `👤 Cliente: ${responses.nombre || 'No especificado'}\n`;
+            emailBody += `📱 WhatsApp: ${responses.telefono || 'No especificado'}\n`;
+            emailBody += `📧 Email: ${responses.email || 'No especificado'}\n\n`;
+            emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            // Secciones del cuestionario
+            const sections = {
+                '1': ['idea_general', 'motivacion', 'tipo_servicio'],
+                '2': ['nombre_ideas', 'estilo_nombre', 'idioma_nombre'],
+                '3': ['personalidad', 'edad_marca', 'estilo_vestir', 'forma_hablar'],
+                '4': ['servicios_iniciales', 'especialidad', 'servicios_futuros'],
+                '5': ['publico', 'precio_posicion'],
+                '6': ['ubicacion', 'descripcion_espacio']
+            };
+
+            for (let [sectionNum, fields] of Object.entries(sections)) {
+                emailBody += `📂 SECCIÓN ${sectionNum}\n`;
+                fields.forEach(field => {
+                    if (responses[field]) {
+                        let value = Array.isArray(responses[field]) ? responses[field].join(', ') : responses[field];
+                        emailBody += `• ${field.replace(/_/g, ' ').toUpperCase()}: ${value}\n`;
+                    }
+                });
+                emailBody += `\n`;
+            }
+
+            // Enviar por EmailJS (configura tu cuenta en https://www.emailjs.com/)
+            emailjs.send("service_xxxxx", "template_xxxxx", {
+                to_email: "laritsacamoa@gmail.com",
+                nombre: responses.nombre,
+                telefono: responses.telefono,
+                mensaje: emailBody
+            }).then(function() {
+                // Éxito
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('successContainer').style.display = 'block';
+            }).catch(function(error) {
+                // Fallback: copiar al portapapeles y mailto
+                navigator.clipboard.writeText(emailBody).then(() => {
+                    window.location.href = `mailto:laritsacamoa@gmail.com?subject=Nuevo%20Cuestionario%20Branding&body=${encodeURIComponent(emailBody)}`;
+                });
+            }).finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
         });
 
-        function mostrarResultados(responses) {
-            const sections = [
-                { title: "1. Idea general del negocio", fields: ['idea_general', 'motivacion', 'tipo_servicio'] },
-                { title: "2. Nombre", fields: ['nombre_
+        function limpiarFormulario() {
+            document.getElementById('questionnaireForm').reset();
+        }
+    </script>
+
+    <!-- Email
