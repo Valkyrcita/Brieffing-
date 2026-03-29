@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionario Branding - Uñas, Pestañas y Cejas</title>
     <style>
-        /* Tu CSS permanece igual - no lo modifico */
+        /* Diseño Minimalista y Profesional */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +22,8 @@
         }
 
         .container {
-            max-width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.97);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
@@ -32,7 +33,7 @@
         .header {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
-            padding: 30px 25px;
+            padding: 40px 25px;
             text-align: center;
         }
 
@@ -43,8 +44,8 @@
         }
 
         .header p {
-            opacity: 0.95;
-            font-size: clamp(0.9em, 4vw, 1.1em);
+            opacity: 0.9;
+            font-size: 1.1em;
         }
 
         .form-section {
@@ -64,7 +65,7 @@
 
         .section-title {
             color: #6a1b9a;
-            font-size: clamp(1.1em, 4.5vw, 1.3em);
+            font-size: 1.3em;
             margin-bottom: 18px;
             font-weight: 600;
         }
@@ -77,67 +78,36 @@
             font-size: 16px;
         }
 
-        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+        input[type="text"], 
+        input[type="email"], 
+        input[type="tel"], 
+        textarea {
             width: 100%;
             padding: 16px;
             border: 2px solid #e8e8e8;
             border-radius: 12px;
             font-size: 16px;
-            transition: border-color 0.2s ease;
+            transition: all 0.3s ease;
             font-family: inherit;
-            -webkit-appearance: none;
-            appearance: none;
+            margin-bottom: 15px;
         }
 
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
+        input:focus, textarea:focus {
             outline: none;
             border-color: #8e24aa;
-            box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
+            box-shadow: 0 0 0 4px rgba(142, 36, 170, 0.1);
         }
 
         textarea {
-            min-height: 90px;
+            min-height: 110px;
             resize: vertical;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 12px center;
-            background-repeat: no-repeat;
-            background-size: 18px;
-            padding-right: 45px;
-        }
-
-        .checkbox-group, .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 12px;
-        }
-
-        .checkbox-item, .radio-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 16px;
-            padding: 8px 0;
-        }
-
-        .checkbox-item input[type="checkbox"], 
-        .radio-item input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            margin-top: 2px;
-            flex-shrink: 0;
         }
 
         .buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid #eee;
+            margin-top: 20px;
         }
 
         button {
@@ -149,18 +119,16 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: inherit;
-            width: 100%;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
-            font-size: 17px;
         }
 
-        .btn-primary:hover:not(:disabled) {
-            background: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%);
-            transform: translateY(-1px);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 27, 154, 0.3);
         }
 
         .btn-secondary {
@@ -169,169 +137,155 @@
             border: 2px solid #8e24aa;
         }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: #8e24aa;
-            color: white;
-        }
-
         .success-message {
-            display: none;
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            color: white;
-            padding: 25px;
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            color: #166534;
+            padding: 30px;
             text-align: center;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .results {
-            display: none;
-            padding: 25px;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .result-item {
-            margin-bottom: 22px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f9f5ff 0%, #f1e8ff 100%);
-            border-radius: 12px;
-            border-left: 4px solid #8e24aa;
-        }
-
-        .result-title {
-            color: #6a1b9a;
-            font-size: 1.1em;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .result-content {
-            line-height: 1.6;
-            color: #555;
-            white-space: pre-wrap;
-        }
-
-        .result-list {
-            padding-left: 20px;
-            margin-top: 8px;
-        }
-
-        .back-btn {
-            margin-bottom: 25px;
-        }
-
-        /* Scrollbar personalizada */
-        .results::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .results::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .results::-webkit-scrollbar-thumb {
-            background: #8e24aa;
-            border-radius: 2px;
+            border-radius: 15px;
+            margin: 20px;
         }
 
         @media (min-width: 768px) {
-            body {
-                padding: 25px;
-            }
-            
             .buttons {
                 flex-direction: row;
                 justify-content: center;
             }
-            
             button {
-                width: auto;
-                min-width: 140px;
+                width: 200px;
             }
-        }
-
-        /* Estilos para mensajes de error */
-        .error-message {
-            display: none;
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .error-message.show {
-            display: block;
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>✨ Cuestionario Branding</h1>
-            <p>Uñas, Pestañas y Cejas</p>
+
+<div class="container">
+    <div class="header">
+        <h1>✨ Cuestionario Branding</h1>
+        <p>Uñas, Pestañas y Cejas</p>
+    </div>
+
+    <div id="formContainer">
+        <form action="https://formspree.io/f/laritsacamoa@gmail.com" method="POST" id="questionnaireForm">
+            <div class="form-section">
+                
+                <div class="section">
+                    <div class="section-title">📱 Tus datos de contacto</div>
+                    <label>Nombre completo *</label>
+                    <input type="text" name="Nombre_Cliente" required>
+                    
+                    <label>Teléfono de WhatsApp *</label>
+                    <input type="tel" name="WhatsApp" required placeholder="Ej: 300 123 4567">
+                    
+                    <label>Email (donde recibirás respuesta)</label>
+                    <input type="email" name="_replyto" placeholder="tu@email.com">
+                </div>
+
+                <div class="section">
+                    <div class="section-title">1. Idea general del negocio</div>
+                    <label>¿Cómo te imaginas tu negocio en pocas palabras? *</label>
+                    <textarea name="Idea_General" required></textarea>
+                    
+                    <label>¿Qué te motivó a empezar esto? *</label>
+                    <textarea name="Motivacion" required></textarea>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">3. Personalidad de la marca</div>
+                    <label>Si tu marca fuera una persona, ¿cómo sería? *</label>
+                    <textarea name="Personalidad" required placeholder="Elegante, coqueta, minimalista..."></textarea>
+                    
+                    <label>¿Cómo vestiría y qué estilo de música escucharía? *</label>
+                    <textarea name="Estilo_y_Musica" required></textarea>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">4. Servicios</div>
+                    <label>¿Qué servicios darás desde el inicio? *</label>
+                    <textarea name="Servicios" required placeholder="Manicura, pedicura, pestañas..."></textarea>
+                    
+                    <label>¿Cuál será tu especialidad?</label>
+                    <textarea name="Especialidad"></textarea>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">7. Estilo visual</div>
+                    <label>¿Qué colores te gustan para tu marca? *</label>
+                    <textarea name="Colores_Favoritos" required></textarea>
+                    
+                    <label>¿Qué cosas NO te gustan visualmente? *</label>
+                    <textarea name="Cosas_a_Evitar" required></textarea>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+                    <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="successContainer" style="display: none;">
+        <div class="success-message">
+            <h2>✅ ¡Formulario Enviado!</h2>
+            <br>
+            <p>Tus respuestas han sido enviadas a <strong>laritsacamoa@gmail.com</strong>.</p>
+            <p>Pronto me pondré en contacto contigo para empezar la magia ✨</p>
+            <br>
+            <button class="btn-secondary" onclick="location.reload()">Enviar otro</button>
         </div>
+    </div>
+</div>
 
-        <div id="formContainer">
-            <form id="questionnaireForm">
-                <div class="form-section">
-                    <!-- Datos de contacto -->
-                    <div class="section">
-                        <div class="section-title">📱 Tus datos de contacto</div>
-                        <label>Nombre completo *</label>
-                        <input type="text" name="nombre" required>
-                        
-                        <label>Teléfono de WhatsApp *</label>
-                        <input type="tel" name="telefono" required placeholder="Ej: 300 123 4567">
-                        
-                        <label>Email (opcional)</label>
-                        <input type="email" name="email" placeholder="tu@email.com">
-                    </div>
+<script>
+    const form = document.getElementById('questionnaireForm');
+    const formContainer = document.getElementById('formContainer');
+    const successContainer = document.getElementById('successContainer');
 
-                    <!-- Sección 1 -->
-                    <div class="section">
-                        <div class="section-title">1. Idea general del negocio</div>
-                        <label>¿Cómo te imaginas tu negocio en pocas palabras? *</label>
-                        <textarea name="idea_general" required></textarea>
-                        
-                        <label>¿Qué te motivó a empezar esto? *</label>
-                        <textarea name="motivacion" required></textarea>
-                        
-                        <label>¿Quieres que se sienta más como un servicio rápido o como una experiencia (tipo spa, relax, etc.)? *</label>
-                        <textarea name="tipo_servicio" required placeholder="Describe cómo quieres que se sienta..."></textarea>
-                    </div>
+    // Manejo del envío mediante AJAX para no recargar la página
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = form.querySelector('.btn-primary');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Enviando...";
 
-                    <!-- Sección 2 -->
-                    <div class="section">
-                        <div class="section-title">2. Nombre (si tienes alguna idea)</div>
-                        <label>¿Tienes algún nombre pensado o palabras que te gusten? *</label>
-                        <textarea name="nombre_ideas" required></textarea>
-                        
-                        <label>¿Te gustaría algo más elegante, divertido, moderno o sencillo? *</label>
-                        <textarea name="estilo_nombre" required placeholder="Describe el estilo que prefieres..."></textarea>
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                formContainer.style.display = 'none';
+                successContainer.style.display = 'block';
+                window.scrollTo(0, 0);
+            } else {
+                alert("Ups! Hubo un problema al enviar el formulario.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "✨ Enviar Respuestas";
+            }
+        } catch (error) {
+            alert("Error de conexión. Inténtalo de nuevo.");
+            submitBtn.disabled = false;
+        }
+    };
+
+    function limpiarFormulario() {
+        if(confirm('¿Estás seguro de que quieres borrar todo?')) {
+            form.reset();
+            window.scrollTo(0, 0);
+        }
+    }
+</script>
+
+</body>
+</html>
+extarea>
                         
                         <label>¿Prefieres algo en español, inglés o mixto? *</label>
                         <textarea name="idioma_nombre" required placeholder="Explica tu preferencia..."></textarea>
