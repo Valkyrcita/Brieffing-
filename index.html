@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionario Branding - Uñas, Pestañas y Cejas</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
-        /* Diseño Minimalista y Profesional */
         * {
             margin: 0;
             padding: 0;
@@ -22,8 +22,7 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 100%;
             background: rgba(255, 255, 255, 0.97);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
@@ -33,7 +32,7 @@
         .header {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
-            padding: 40px 25px;
+            padding: 30px 25px;
             text-align: center;
         }
 
@@ -44,8 +43,8 @@
         }
 
         .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
+            opacity: 0.95;
+            font-size: clamp(0.9em, 4vw, 1.1em);
         }
 
         .form-section {
@@ -65,7 +64,7 @@
 
         .section-title {
             color: #6a1b9a;
-            font-size: 1.3em;
+            font-size: clamp(1.1em, 4.5vw, 1.3em);
             margin-bottom: 18px;
             font-weight: 600;
         }
@@ -78,36 +77,67 @@
             font-size: 16px;
         }
 
-        input[type="text"], 
-        input[type="email"], 
-        input[type="tel"], 
-        textarea {
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
             width: 100%;
             padding: 16px;
             border: 2px solid #e8e8e8;
             border-radius: 12px;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease;
             font-family: inherit;
-            margin-bottom: 15px;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
-        input:focus, textarea:focus {
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #8e24aa;
-            box-shadow: 0 0 0 4px rgba(142, 36, 170, 0.1);
+            box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.1);
         }
 
         textarea {
-            min-height: 110px;
+            min-height: 90px;
             resize: vertical;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            padding-right: 45px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        .checkbox-item input[type="checkbox"], 
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
 
         .buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-top: 20px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
         }
 
         button {
@@ -119,16 +149,18 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: inherit;
+            width: 100%;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%);
             color: white;
+            font-size: 17px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 27, 154, 0.3);
+        .btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -137,622 +169,314 @@
             border: 2px solid #8e24aa;
         }
 
+        .btn-secondary:hover:not(:disabled) {
+            background: #8e24aa;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .results {
+            display: none;
+            padding: 25px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .result-item {
+            margin-bottom: 22px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f9f5ff 0%, #f1e8ff 100%);
+            border-radius: 12px;
+            border-left: 4px solid #8e24aa;
+        }
+
+        .result-title {
+            color: #6a1b9a;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .result-content {
+            line-height: 1.6;
+            color: #555;
+            white-space: pre-wrap;
+        }
+
+        .result-list {
+            padding-left: 20px;
+        }
+
         .success-message {
-            background: #f0fdf4;
-            border: 2px solid #22c55e;
-            color: #166534;
-            padding: 30px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            border-radius: 15px;
-            margin: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .back-btn {
+            margin-bottom: 25px;
+        }
+
+        /* Scrollbar personalizada para móvil */
+        .results::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .results::-webkit-scrollbar-thumb {
+            background: #8e24aa;
+            border-radius: 2px;
         }
 
         @media (min-width: 768px) {
+            body {
+                padding: 25px;
+            }
+            
             .buttons {
                 flex-direction: row;
                 justify-content: center;
             }
+            
             button {
-                width: 200px;
+                width: auto;
+                min-width: 140px;
             }
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="header">
-        <h1>✨ Cuestionario Branding</h1>
-        <p>Uñas, Pestañas y Cejas</p>
-    </div>
-
-    <div id="formContainer">
-        <form action="https://formspree.io/f/laritsacamoa@gmail.com" method="POST" id="questionnaireForm">
-            <div class="form-section">
-                
-                <div class="section">
-                    <div class="section-title">📱 Tus datos de contacto</div>
-                    <label>Nombre completo *</label>
-                    <input type="text" name="Nombre_Cliente" required>
-                    
-                    <label>Teléfono de WhatsApp *</label>
-                    <input type="tel" name="WhatsApp" required placeholder="Ej: 300 123 4567">
-                    
-                    <label>Email (donde recibirás respuesta)</label>
-                    <input type="email" name="_replyto" placeholder="tu@email.com">
-                </div>
-
-                <div class="section">
-                    <div class="section-title">1. Idea general del negocio</div>
-                    <label>¿Cómo te imaginas tu negocio en pocas palabras? *</label>
-                    <textarea name="Idea_General" required></textarea>
-                    
-                    <label>¿Qué te motivó a empezar esto? *</label>
-                    <textarea name="Motivacion" required></textarea>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">3. Personalidad de la marca</div>
-                    <label>Si tu marca fuera una persona, ¿cómo sería? *</label>
-                    <textarea name="Personalidad" required placeholder="Elegante, coqueta, minimalista..."></textarea>
-                    
-                    <label>¿Cómo vestiría y qué estilo de música escucharía? *</label>
-                    <textarea name="Estilo_y_Musica" required></textarea>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">4. Servicios</div>
-                    <label>¿Qué servicios darás desde el inicio? *</label>
-                    <textarea name="Servicios" required placeholder="Manicura, pedicura, pestañas..."></textarea>
-                    
-                    <label>¿Cuál será tu especialidad?</label>
-                    <textarea name="Especialidad"></textarea>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">7. Estilo visual</div>
-                    <label>¿Qué colores te gustan para tu marca? *</label>
-                    <textarea name="Colores_Favoritos" required></textarea>
-                    
-                    <label>¿Qué cosas NO te gustan visualmente? *</label>
-                    <textarea name="Cosas_a_Evitar" required></textarea>
-                </div>
-
-                <div class="buttons">
-                    <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
-                    <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div id="successContainer" style="display: none;">
-        <div class="success-message">
-            <h2>✅ ¡Formulario Enviado!</h2>
-            <br>
-            <p>Tus respuestas han sido enviadas a <strong>laritsacamoa@gmail.com</strong>.</p>
-            <p>Pronto me pondré en contacto contigo para empezar la magia ✨</p>
-            <br>
-            <button class="btn-secondary" onclick="location.reload()">Enviar otro</button>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Cuestionario Branding</h1>
+            <p>Uñas, Pestañas y Cejas</p>
         </div>
-    </div>
-</div>
 
-<script>
-    const form = document.getElementById('questionnaireForm');
-    const formContainer = document.getElementById('formContainer');
-    const successContainer = document.getElementById('successContainer');
-
-    // Manejo del envío mediante AJAX para no recargar la página
-    form.onsubmit = async (e) => {
-        e.preventDefault();
-        
-        const submitBtn = form.querySelector('.btn-primary');
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Enviando...";
-
-        const formData = new FormData(form);
-        
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                formContainer.style.display = 'none';
-                successContainer.style.display = 'block';
-                window.scrollTo(0, 0);
-            } else {
-                alert("Ups! Hubo un problema al enviar el formulario.");
-                submitBtn.disabled = false;
-                submitBtn.innerText = "✨ Enviar Respuestas";
-            }
-        } catch (error) {
-            alert("Error de conexión. Inténtalo de nuevo.");
-            submitBtn.disabled = false;
-        }
-    };
-
-    function limpiarFormulario() {
-        if(confirm('¿Estás seguro de que quieres borrar todo?')) {
-            form.reset();
-            window.scrollTo(0, 0);
-        }
-    }
-</script>
-
-</body>
-</html>
-extarea>
-                        
-                        <label>¿Prefieres algo en español, inglés o mixto? *</label>
-                        <textarea name="idioma_nombre" required placeholder="Explica tu preferencia..."></textarea>
+        <div id="formContainer">
+            <form id="questionnaireForm">
+                <!-- Sección 1: Datos personales -->
+                <div class="form-section">
+                    <div class="section">
+                        <div class="section-title">📋 Datos Personales</div>
+                        <div>
+                            <label for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="email">Correo electrónico *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="telefono">Teléfono (opcional)</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
                     </div>
 
-                    <!-- Sección 3 -->
+                    <!-- Sección 2: Negocio -->
                     <div class="section">
-                        <div class="section-title">3. Personalidad de la marca (como si fuera una persona)</div>
-                        <label>Si tu marca fuera una persona, ¿cómo sería? (ej: elegante, divertida, seria, coqueta, minimalista…) *</label>
-                        <textarea name="personalidad" required></textarea>
-                        
-                        <label>¿Qué edad tendría más o menos? *</label>
-                        <textarea name="edad_marca" required placeholder="Ej: 25-35 años, joven adulta, etc."></textarea>
-                        
-                        <label>¿Cómo vestiría? (lujosa, casual, trendy, sencilla…) *</label>
-                        <textarea name="estilo_vestir" required></textarea>
-                        
-                        <label>¿Cómo hablaría? (formal, amigable, con confianza, "de tú a tú") *</label>
-                        <textarea name="forma_hablar" required></textarea>
-                        
-                        <label>¿Qué tipo de música escucharía o qué estilo de vida tendría? *</label>
-                        <textarea name="estilo_vida" required></textarea>
+                        <div class="section-title">💅 Tu Negocio</div>
+                        <div>
+                            <label for="nombreNegocio">Nombre de tu negocio *</label>
+                            <input type="text" id="nombreNegocio" name="nombreNegocio" required>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="añosExperiencia">¿Cuántos años llevas en el negocio?</label>
+                            <select id="añosExperiencia" name="añosExperiencia">
+                                <option value="">Selecciona...</option>
+                                <option value="menos1">Menos de 1 año</option>
+                                <option value="1-3">1-3 años</option>
+                                <option value="3-5">3-5 años</option>
+                                <option value="5+">Más de 5 años</option>
+                            </select>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="servicios">¿Qué servicios ofreces? (selecciona todos los que apliquen)</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="uñas" name="servicios" value="Uñas">
+                                    <label for="uñas">Uñas (acrílico, gel, esmalte semipermanente, etc.)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="pestañas" name="servicios" value="Pestañas">
+                                    <label for="pestañas">Pestañas (extensiones, lifting, etc.)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cejas" name="servicios" value="Cejas">
+                                    <label for="cejas">Cejas (microblading, laminado, tinte, etc.)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="otros" name="servicios" value="Otros">
+                                    <label for="otros">Otros servicios</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Sección 4 -->
+                    <!-- Sección 3: Público objetivo -->
                     <div class="section">
-                        <div class="section-title">4. Servicios que vas a ofrecer</div>
-                        <label>¿Qué servicios específicos quieres dar desde el inicio? (manicura, pedicura, uñas acrílicas, gel, lifting de pestañas, extensiones, diseño de cejas, etc.) *</label>
-                        <textarea name="servicios_iniciales" required></textarea>
-                        
-                        <label>¿Hay algún servicio que quieras que sea tu "especialidad"?</label>
-                        <textarea name="especialidad"></textarea>
-                        
-                        <label>¿Planeas agregar más servicios en el futuro?</label>
-                        <textarea name="servicios_futuros"></textarea>
+                        <div class="section-title">👥 Público Objetivo</div>
+                        <div>
+                            <label>Edad principal de tus clientas:</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="edad18-25" name="edad" value="18-25">
+                                    <label for="edad18-25">18-25 años</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="edad25-35" name="edad" value="25-35">
+                                    <label for="edad25-35">25-35 años</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="edad35-45" name="edad" value="35-45">
+                                    <label for="edad35-45">35-45 años</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="edad45+" name="edad" value="45+">
+                                    <label for="edad45+">45+ años</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="clientasIdeal">Describe a tu clienta ideal (hábitos, gustos, estilo de vida):</label>
+                            <textarea id="clientasIdeal" name="clientasIdeal" rows="3"></textarea>
+                        </div>
                     </div>
 
-                    <!-- Sección 5 -->
+                    <!-- Sección 4: Competencia y diferenciación -->
                     <div class="section">
-                        <div class="section-title">5. Público objetivo</div>
-                        <label>¿A qué tipo de clientas quieres atraer? Describe... *</label>
-                        <textarea name="clientas_ideales" required placeholder="Ej: Jóvenes 15-25, adultas trabajadoras 25-45, etc."></textarea>
-                        
-                        <label>¿Quieres que tu marca se sienta más económica, intermedia o premium? *</label>
-                        <textarea name="precio_posicion" required placeholder="Explica tu visión de precios..."></textarea>
-                        
-                        <label>¿Qué estilo tienen tus clientas ideales? (arregladas, naturales, llamativas, etc.) *</label>
-                        <textarea name="estilo_clientas" required></textarea>
+                        <div class="section-title">⭐ Diferenciación</div>
+                        <div>
+                            <label for="diferenciador">¿Qué te hace única/o frente a la competencia?</label>
+                            <textarea id="diferenciador" name="diferenciador" rows="3"></textarea>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="competencia">¿Quiénes son tus principales competidores?</label>
+                            <input type="text" id="competencia" name="competencia">
+                        </div>
                     </div>
 
-                    <!-- Sección 6 -->
+                    <!-- Sección 5: Estilo y preferencias -->
                     <div class="section">
-                        <div class="section-title">6. Lugar y contexto del negocio</div>
-                        <label>¿Dónde va a funcionar el negocio al inicio? (casa, local independiente, a domicilio) *</label>
-                        <textarea name="ubicacion" required></textarea>
-                        
-                        <label>¿Cómo es el espacio? (pequeño, amplio, compartido…) *</label>
-                        <textarea name="descripcion_espacio" required></textarea>
-                        
-                        <label>¿Qué ambiente quieres crear? (relajante, moderno, girly, elegante…) *</label>
-                        <textarea name="ambiente_deseado" required></textarea>
-                    </div>
-
-                    <!-- Sección 7 -->
-                    <div class="section">
-                        <div class="section-title">7. Estilo visual</div>
-                        <label>¿Qué colores te gustan para tu marca? *</label>
-                        <textarea name="colores_preferidos" required></textarea>
-                        
-                        <label>¿Prefieres algo minimalista o más cargado/decorado? *</label>
-                        <textarea name="estilo_visual" required></textarea>
-                        
-                        <label>¿Te gustan más los tonos neutros, pasteles, brillantes, oscuros? *</label>
-                        <textarea name="tonos_preferidos" required></textarea>
-                        
-                        <label>¿Qué cosas NO te gustan (para evitarlas)? *</label>
-                        <textarea name="colores_evitar" required></textarea>
-                    </div>
-
-                    <!-- Sección 8 -->
-                    <div class="section">
-                        <div class="section-title">8. Referencias y gustos</div>
-                        <label>¿Hay marcas (de uñas, belleza o cualquier cosa) que te gusten visualmente? *</label>
-                        <textarea name="marcas_referencias" required></textarea>
-                        
-                        <label>¿Como la tarjeta que me enseñaste, hay algún material o elemento que te llame la atención? *</label>
-                        <textarea name="materiales_elementos" required></textarea>
-                        
-                        <label>¿Qué te llamó la atención de esos ejemplos? (colores, tipografía, estilo…) *</label>
-                        <textarea name="detalles_referencias" required></textarea>
-                    </div>
-
-                    <!-- Sección 9 -->
-                    <div class="section">
-                        <div class="section-title">9. Materiales y producción</div>
-                        <label>¿Con qué posibilidades cuentas para imprimir y montar cosas? Describe... *</label>
-                        <textarea name="posibilidades_impresion" required placeholder="Tarjetas, stickers, carteles, uniformes, etc."></textarea>
-                    </div>
-
-                    <!-- Sección 10 -->
-                    <div class="section">
-                        <div class="section-title">10. Presencia digital</div>
-                        <label>¿Vas a usar redes sociales? ¿Cuáles? (Instagram, WhatsApp, Facebook…) *</label>
-                        <textarea name="redes_sociales" required></textarea>
-                        
-                        <label>¿Te interesa tener logo, plantillas para posts, historias, etc.? *</label>
-                        <textarea name="necesidades_digitales" required></textarea>
-                        
-                        <label>¿Vas a manejar citas online?</label>
-                        <textarea name="citas_online"></textarea>
-                    </div>
-
-                    <!-- Sección 11 -->
-                    <div class="section">
-                        <div class="section-title">11. Proyección a futuro</div>
-                        <label>¿Cómo te gustaría ver tu negocio en 1 año? *</label>
-                        <textarea name="proyeccion_futura" required></textarea>
+                        <div class="section-title">🎨 Estilo Visual</div>
+                        <div>
+                            <label>Estilo que prefieres para tu marca:</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="elegante" name="estilo" value="Elegante">
+                                    <label for="elegante">✨ Elegante y sofisticado</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="moderno" name="estilo" value="Moderno">
+                                    <label for="moderno">⚡ Moderno y minimalista</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="divertido" name="estilo" value="Divertido">
+                                    <label for="divertido">🌈 Divertido y colorido</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="boho" name="estilo" value="Boho">
+                                    <label for="boho">🌿 Boho/natural</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <label for="coloresFavoritos">Colores que te gustan para tu marca (ej: rosas, dorados, negros):</label>
+                            <input type="text" id="coloresFavoritos" name="coloresFavoritos">
+                        </div>
                     </div>
 
                     <div class="buttons">
-                        <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
-                        <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
+                        <button type="button" class="btn-secondary" onclick="showResults()">Ver Resultados</button>
+                        <button type="submit" class="btn-primary" id="submitBtn">✨ Enviar a mi correo</button>
                     </div>
                 </div>
             </form>
         </div>
 
-        <!-- Mensaje de éxito -->
-        <div id="successContainer" style="display: none; padding: 25px;">
-            <div class="success-message show" id="successMessage">
-                <h2>✅ ¡Perfecto!</h2>
-                <p>Tus respuestas han sido enviadas correctamente a <strong>laritsacamoa@gmail.com</strong></p>
-                <p>Te contactaré pronto por WhatsApp para trabajar en tu branding ✨</p>
-                <button class="btn-secondary" onclick="location.reload()" style="margin-top: 20px; max-width: 250px;">Hacer otro cuestionario</button>
-            </div>
+        <!-- Resultados -->
+        <div id="resultsContainer" class="results">
+            <button class="btn-secondary back-btn" onclick="showForm()">← Volver al formulario</button>
+            <div id="resultsContent"></div>
         </div>
+    </div>
 
-        <!-- Mensaje de error -->
-        <div id="errorContainer"a>
-                        
-                        <label>¿Qué edad tendría más o menos? *</label>
-                        <textarea name="edad_marca" required placeholder="Ej: 25-35 años, joven adulta, etc."></textarea>
-                        
-                        <label>¿Cómo vestiría? (lujosa, casual, trendy, sencilla…) *</label>
-                        <textarea name="estilo_vestir" required></textarea>
-                        
-                        <label>¿Cómo hablaría? (formal, amigable, con confianza, "de tú a tú") *</label>
-                        <textarea name="forma_hablar" required></textarea>
-                        
-                        <label>¿Qué tipo de música escucharía o qué estilo de vida tendría? *</label>
-                        <textarea name="estilo_vida" required></textarea>
-                    </div>
-
-                    <!-- Sección 4 -->
-                    <div class="section">
-                        <div class="section-title">4. Servicios que vas a ofrecer</div>
-                        <label>¿Qué servicios específicos quieres dar desde el inicio? (manicura, pedicura, uñas acrílicas, gel, lifting de pestañas, extensiones, diseño de cejas, etc.) *</label>
-                        <textarea name="servicios_iniciales" required></textarea>
-                        
-                        <label>¿Hay algún servicio que quieras que sea tu "especialidad"?</label>
-                        <textarea name="especialidad"></textarea>
-                        
-                        <label>¿Planeas agregar más servicios en el futuro?</label>
-                        <textarea name="servicios_futuros"></textarea>
-                    </div>
-
-                    <!-- Sección 5 -->
-                    <div class="section">
-                        <div class="section-title">5. Público objetivo</div>
-                        <label>¿A qué tipo de clientas quieres atraer? Describe... *</label>
-                        <textarea name="clientas_ideales" required placeholder="Ej: Jóvenes 15-25, adultas trabajadoras 25-45, etc."></textarea>
-                        
-                        <label>¿Quieres que tu marca se sienta más económica, intermedia o premium? *</label>
-                        <textarea name="precio_posicion" required placeholder="Explica tu visión de precios..."></textarea>
-                        
-                        <label>¿Qué estilo tienen tus clientas ideales? (arregladas, naturales, llamativas, etc.) *</label>
-                        <textarea name="estilo_clientas" required></textarea>
-                    </div>
-
-                    <!-- Sección 6 -->
-                    <div class="section">
-                        <div class="section-title">6. Lugar y contexto del negocio</div>
-                        <label>¿Dónde va a funcionar el negocio al inicio? (casa, local independiente, a domicilio) *</label>
-                        <textarea name="ubicacion" required></textarea>
-                        
-                        <label>¿Cómo es el espacio? (pequeño, amplio, compartido…) *</label>
-                        <textarea name="descripcion_espacio" required></textarea>
-                        
-                        <label>¿Qué ambiente quieres crear? (relajante, moderno, girly, elegante…) *</label>
-                        <textarea name="ambiente_deseado" required></textarea>
-                    </div>
-
-                    <!-- Sección 7 -->
-                    <div class="section">
-                        <div class="section-title">7. Estilo visual</div>
-                        <label>¿Qué colores te gustan para tu marca? *</label>
-                        <textarea name="colores_preferidos" required></textarea>
-                        
-                        <label>¿Prefieres algo minimalista o más cargado/decorado? *</label>
-                        <textarea name="estilo_visual" required></textarea>
-                        
-                        <label>¿Te gustan más los tonos neutros, pasteles, brillantes, oscuros? *</label>
-                        <textarea name="tonos_preferidos" required></textarea>
-                        
-                        <label>¿Qué cosas NO te gustan (para evitarlas)? *</label>
-                        <textarea name="colores_evitar" required></textarea>
-                    </div>
-
-                    <!-- Sección 8 -->
-                    <div class="section">
-                        <div class="section-title">8. Referencias y gustos</div>
-                        <label>¿Hay marcas (de uñas, belleza o cualquier cosa) que te gusten visualmente? *</label>
-                        <textarea name="marcas_referencias" required></textarea>
-                        
-                        <label>¿Como la tarjeta que me enseñaste, hay algún material o elemento que te llame la atención? *</label>
-                        <textarea name="materiales_elementos" required></textarea>
-                        
-                        <label>¿Qué te llamó la atención de esos ejemplos? (colores, tipografía, estilo…) *</label>
-                        <textarea name="detalles_referencias" required></textarea>
-                    </div>
-
-                    <!-- Sección 9 -->
-                    <div class="section">
-                        <div class="section-title">9. Materiales y producción</div>
-                        <label>¿Con qué posibilidades cuentas para imprimir y montar cosas? Describe... *</label>
-                        <textarea name="posibilidades_impresion" required placeholder="Tarjetas, stickers, carteles, uniformes, etc."></textarea>
-                    </div>
-
-                    <!-- Sección 10 -->
-                    <div class="section">
-                        <div class="section-title">10. Presencia digital</div>
-                        <label>¿Vas a usar redes sociales? ¿Cuáles? (Instagram, WhatsApp, Facebook…) *</label>
-                        <textarea name="redes_sociales" required></textarea>
-                        
-                        <label>¿Te interesa tener logo, plantillas para posts, historias, etc.? *</label>
-                        <textarea name="necesidades_digitales" required></textarea>
-                        
-                        <label>¿Vas a manejar citas online?</label>
-                        <textarea name="citas_online"></textarea>
-                    </div>
-
-                    <!-- Sección 11 -->
-                    <div class="section">
-                        <div class="section-title">11. Proyección a futuro</div>
-                        <label>¿Cómo te gustaría ver tu negocio en 1 año? *</label>
-                        <textarea name="proyeccion_futura" required></textarea>
-                    </div>
-
-                    <div class="buttons">
-                        <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
-                        <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div id="successContainer" style="display: none; padding: 25px;">
-            <div class="success-message show" id="successMessage">
-                <h2>✅ ¡Perfecto!</h2>
-                <p>Tus respuestas han sido enviadas correctamente a <strong>laritsacamoa@gmail.com</strong></p>
-                <p>Te contactaré pronto por WhatsApp para trabajar en tu branding ✨</p>
-                <button class="btn-secondary" onclick="location.reload()" style="margin-top: 20px; max-width: 250px;">Hacer otro cuestionario</button>
-            </div>
-        </div>
+    <!-- Mensajes de estado -->
+    <div id="successMessage" class="success-message">
+        ✅ ¡Gracias! Tu cuestionario ha sido enviado exitosamente a <strong>laritsacamoa@gmail.com</strong>. Recibirás los resultados en breve.
+    </div>
+    <div id="errorMessage" class="error-message">
+        ❌ Error al enviar. Por favor, intenta de nuevo.
     </div>
 
     <script>
-        document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Configuración de EmailJS - REEMPLAZA CON TUS CLAVES REALES
+        // 1. Ve a https://www.emailjs.com/ y crea una cuenta gratis
+        // 2. Crea un servicio email y obtén tu SERVICE_ID
+        // 3. Crea una plantilla email y obtén tu TEMPLATE_ID
+        // 4. Obtén tu PUBLIC_KEY
+
+        const SERVICE_ID = 'YOUR_SERVICE_ID'; // Reemplaza
+        const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Reemplaza  
+        const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Reemplaza
+
+        emailjs.init(PUBLIC_KEY);
+
+        function showResults() {
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('resultsContainer').classList.add('show');
             
-            // Mostrar loading
-            const submitBtn = document.querySelector('.btn-primary');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Enviando... ⏳';
-            submitBtn.disabled = true;
-
-            // Recopilar datos
-            const formData = new FormData(this);
-            const responses = {};
-            
-            for (let [key, value] of formData.entries()) {
-                responses[key] = value;
-            }
-
-            // Formatear mensaje para email
-            let emailBody = `📋 NUEVO CUESTIONARIO BRANDING COMPLETO\n\n`;
-            emailBody += `👤 Cliente: ${responses.nombre || 'No especificado'}\n`;
-            emailBody += `📱 WhatsApp: ${responses.telefono || 'No especific        <option value="espanol">Español</option>
-                            <option value="ingles">Inglés</option>
-                            <option value="mixto">Mixto</option>
-                        </select>
-                    </div>
-
-                    <!-- Sección 3 -->
-                    <div class="section">
-                        <div class="section-title">3. Personalidad de la marca</div>
-                        <label>Si fuera una persona, ¿cómo sería? *</label>
-                        <textarea name="personalidad" required></textarea>
-                        
-                        <label>Edad aproximada</label>
-                        <input type="text" name="edad_marca">
-                        
-                        <label>¿Cómo vestiría? *</label>
-                        <textarea name="estilo_vestir" required></textarea>
-                        
-                        <label>¿Cómo hablaría? *</label>
-                        <textarea name="forma_hablar" required></textarea>
-                    </div>
-
-                    <!-- Sección 4 -->
-                    <div class="section">
-                        <div class="section-title">4. Servicios</div>
-                        <label>Servicios desde el inicio *</label>
-                        <textarea name="servicios_iniciales" required></textarea>
-                        
-                        <label>Tu especialidad</label>
-                        <input type="text" name="especialidad">
-                        
-                        <label>Servicios futuros</label>
-                        <textarea name="servicios_futuros"></textarea>
-                    </div>
-
-                    <!-- Sección 5 -->
-                    <div class="section">
-                        <div class="section-title">5. Público objetivo</div>
-                        <label>¿Qué clientas quieres atraer?</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="jovenes"> Jóvenes (15-25)
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="adultas"> Adultas (25-45)
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="exclusivo"> Exclusivo
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" name="publico[]" value="todos"> Todo público
-                            </div>
-                        </div>
-                        
-                        <label>Posición de precio *</label>
-                        <select name="precio_posicion" required>
-                            <option value="">Selecciona...</option>
-                            <option value="economica">Económica</option>
-                            <option value="intermedia">Intermedia</option>
-                            <option value="premium">Premium</option>
-                        </select>
-                    </div>
-
-                    <!-- Sección 6 -->
-                    <div class="section">
-                        <div class="section-title">6. Ubicación</div>
-                        <label>¿Dónde funcionará? *</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="ubicacion" value="casa" required> En casa
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="ubicacion" value="local"> Local propio
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="ubicacion" value="domicilio"> A domicilio
-                            </div>
-                        </div>
-                        
-                        <label>Descripción del espacio *</label>
-                        <textarea name="descripcion_espacio" required></textarea>
-                    </div>
-
-                    <div class="buttons">
-                        <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
-                        <button type="submit" class="btn-primary">✨ Enviar Respuestas</button>
+            // Aquí puedes agregar lógica para mostrar resultados del cuestionario
+            document.getElementById('resultsContent').innerHTML = `
+                <div class="result-item">
+                    <div class="result-title">📋 Resumen de tus respuestas</div>
+                    <div class="result-content">
+                        Haz clic en "Enviar a mi correo" para recibir todo el análisis completo en tu bandeja de entrada.
                     </div>
                 </div>
-            </form>
-        </div>
+            `;
+        }
 
-        <div id="successContainer" style="display: none; padding: 25px;">
-            <div class="success-message show" id="successMessage">
-                <h2>✅ ¡Perfecto!</h2>
-                <p>Tus respuestas han sido enviadas correctamente a <strong>laritsacamoa@gmail.com</strong></p>
-                <p>Te contactaré pronto por WhatsApp para trabajar en tu branding ✨</p>
-                <button class="btn-secondary" onclick="location.reload()" style="margin-top: 20px; max-width: 250px;">Hacer otro cuestionario</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // EmailJS configuration - Reemplaza con tus credenciales
-        // emailjs.init("TU_PUBLIC_KEY"); // Configura esto en tu cuenta EmailJS
+        function showForm() {
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('resultsContainer').classList.remove('show');
+        }
 
         document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Mostrar loading
-            const submitBtn = document.querySelector('.btn-primary');
+            const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Enviando... ⏳';
             submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Enviando... ⏳';
 
-            // Recopilar datos
+            // Recopilar todos los datos del formulario
             const formData = new FormData(this);
-            const responses = {};
+            const data = {};
             
-            for (let [key, value] of formData.entries()) {
-                if (key.includes('[]')) {
-                    const mainKey = key.replace('[]', '');
-                    if (!responses[mainKey]) responses[mainKey] = [];
-                    responses[mainKey].push(value);
-                } else {
-                    responses[key] = value;
-                }
-            }
-
-            // Formatear mensaje para email
-            let emailBody = `📋 NUEVO CUESTIONARIO BRANDING\n\n`;
-            emailBody += `👤 Cliente: ${responses.nombre || 'No especificado'}\n`;
-            emailBody += `📱 WhatsApp: ${responses.telefono || 'No especificado'}\n`;
-            emailBody += `📧 Email: ${responses.email || 'No especificado'}\n\n`;
-            emailBody += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-
-            // Secciones del cuestionario
-            const sections = {
-                '1': ['idea_general', 'motivacion', 'tipo_servicio'],
-                '2': ['nombre_ideas', 'estilo_nombre', 'idioma_nombre'],
-                '3': ['personalidad', 'edad_marca', 'estilo_vestir', 'forma_hablar'],
-                '4': ['servicios_iniciales', 'especialidad', 'servicios_futuros'],
-                '5': ['publico', 'precio_posicion'],
-                '6': ['ubicacion', 'descripcion_espacio']
-            };
-
-            for (let [sectionNum, fields] of Object.entries(sections)) {
-                emailBody += `📂 SECCIÓN ${sectionNum}\n`;
-                fields.forEach(field => {
-                    if (responses[field]) {
-                        let value = Array.isArray(responses[field]) ? responses[field].join(', ') : responses[field];
-                        emailBody += `• ${field.replace(/_/g, ' ').toUpperCase()}: ${value}\n`;
-                    }
-                });
-                emailBody += `\n`;
-            }
-
-            // Enviar por EmailJS (configura tu cuenta en https://www.emailjs.com/)
-            emailjs.send("service_xxxxx", "template_xxxxx", {
-                to_email: "laritsacamoa@gmail.com",
-                nombre: responses.nombre,
-                telefono: responses.telefono,
-                mensaje: emailBody
-            }).then(function() {
-                // Éxito
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successContainer').style.display = 'block';
-            }).catch(function(error) {
-                // Fallback: copiar al portapapeles y mailto
-                navigator.clipboard.writeText(emailBody).then(() => {
-                    window.location.href = `mailto:laritsacamoa@gmail.com?subject=Nuevo%20Cuestionario%20Branding&body=${encodeURIComponent(emailBody)}`;
-                });
-            }).finally(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-
-        function limpiarFormulario() {
-            document.getElementById('questionnaireForm').reset();
-        }
-    </script>
-
-    <!-- Email
+            // Proces
